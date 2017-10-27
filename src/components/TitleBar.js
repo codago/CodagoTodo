@@ -12,11 +12,14 @@ export default class TitleBar extends Component{
   }
 
   render(){
-    const {activeFilter} = this.props
+    const {activeFilter, showModal} = this.props
     return(
       <View style={styles.toolbar}>
       <Text style={styles.button}></Text>
       <Text style={styles.title}>{activeFilter} Todos</Text>
+      <TouchableOpacity style={styles.button} onPress={showModal}>
+        <Text style={styles.text}>Add</Text>
+      </TouchableOpacity>
       </View>
     )
   }
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    width: 0
+    width: 50
   },
   text: {
     color: '#fff',
