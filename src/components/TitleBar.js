@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    width: 50
+    width: 0
   },
   text: {
     color: '#fff',

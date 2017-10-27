@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import TodoList from './TodoList'
 import TitleBar from './TitleBar'
 import Filters from './Filters'
+import {VisibilityFilters} from '../actions/actionTypes'
 
 class TodoApp extends Component{
   constructor(props){
@@ -19,7 +20,7 @@ class TodoApp extends Component{
     return(
       <View style={styles.container}>
       <TitleBar activeFilter={filter} />
-      <TodoList todos={todos} {...todoActs} />
+      <TodoList todos={todos} activeFilter={filter} {...todoActs} />
       <Filters activeFilter={filter} {...filterActs} />
       </View>
     )
@@ -41,7 +42,16 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
   return{
-    todos: state.todos,
+    todos: state.todos.filter(todo => {
+      if(state.filter === VisibilityFilters.ALL){
+        return true
+      }else if(state.filter === VisibilityFilters.COMPLETED){
+        return todo.completed;
+      }
+      else if(state.filter === VisibilityFilters.INCOMPLETE){
+        return !todo.completed;
+      }
+    }),
     filter: state.filter
   }
 }

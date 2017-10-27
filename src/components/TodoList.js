@@ -9,6 +9,7 @@ import {
 
 import AddTodoRow from './AddTodoRow'
 import CompleteToggle from './CompleteToggle'
+import {VisibilityFilters} from '../actions/actionTypes'
 
 export default class TodoList extends Component{
   constructor(props){
@@ -40,16 +41,16 @@ export default class TodoList extends Component{
   }
 
   renderTodoItemTemplate = () => {
-    const {addTodo} = this.props
+    const {addTodo, activeFilter} = this.props
     return(
-      <AddTodoRow addTodo={(name) => addTodo(name, false)}/>
+      <AddTodoRow addTodo={(name) => addTodo(name, activeFilter === VisibilityFilters.COMPLETED)}/>
     )
   }
 
   renderTodoItem = (todo) => {
     const {completeTodo, incompleteTodo} = this.props
     return(
-      <TouchableHighlight underlayColor="#ef2d9"
+      <TouchableHighlight underlayColor="#e4f2d9"
       key={todo.id}
       style={styles.row}
       onPress={()=>{
